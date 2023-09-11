@@ -289,7 +289,7 @@ bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 ## App shortcuts
 bindsym $mod+n exec /usr/bin/thunar
-bindsym $mod+b exec brave-dev
+bindsym $mod+b exec firefox
 bindsym Print exec scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
 
 # Power Profiles menu switcher (rofi)
@@ -322,14 +322,15 @@ set $ws10 "10"
 #workspace $ws5 output HDMI-0
 exec --no-startup-id xrandr --auto --output eDP-1-0 --left-of HDMI-0
 
+exec --no-startup-id setxkbmap -layout us -option caps:escape
 
 # bind program to workspace and focus to them on startup:
-assign [class="Brave"] $ws1
+assign [class="Firefox"] $ws1
 assign [class="Xfce4-terminal"] $ws2
 assign [class="Thunar"] $ws3
 
 # automatic set focus new window if it opens on another workspace than the current:
-for_window [class=Brave] focus
+for_window [class=Firefox] focus
 for_window [class=Xfce4-terminal] focus
 for_window [class=Thunar] focus
 

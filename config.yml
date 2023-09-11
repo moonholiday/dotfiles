@@ -1,0 +1,12 @@
+- name: Bootstrap development environment
+  hosts: localhost
+
+  tasks:
+  - name: Install packages with pacman
+    become: yes
+    ansible.builtin.pacman:
+      name:
+        - git
+        - tmux
+      state: present
+
