@@ -3,6 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export GOPATH=~/Programs/go
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -103,7 +104,7 @@ alias vim="nvim"
 
 fzf_tmux_session() {
     local folder
-    folder=$(find ~/dev/ -type d | fzf)
+    folder=$(find ~/Dev/ -type d | fzf)
     if [ -n "$folder" ]; then
         folder_name=$(basename "$folder")
         tmux new-session -s "$folder_name" -c "$folder"
