@@ -1,13 +1,11 @@
 #!/bin/bash
 # original source: https://gitlab.com/Nmoleo/i3-volume-brightness-indicator
 
-# taken from here: https://gitlab.com/Nmoleo/i3-volume-brightness-indicator
-
-# See README.md for usage instructions
 bar_color="#7f7fff"
-volume_step=10
+volume_step=5
 brightness_step=10
-max_volume=100
+max_volume=150
+max_brightness=100  # Set maximum brightness to 100
 
 # Uses regex to get volume from pactl
 function get_volume {
@@ -21,39 +19,37 @@ function get_mute {
 
 function get_brightness {
     # Get the current brightness value
-    current_brightness=$(brightnessctl)
-
-    # Extract the brightness value from the output
-    current_brightness=$(echo "$current_brightness" | grep -Po '(?<=Current brightness: )\d+')
-
-    # Calculate the brightness percentage based on a maximum of 255
-    brightness_percentage=$(( ($current_brightness * 100) / 255 ))
-
-    # Echo the calculated brightness percentage
+    current_brightness=$(brightnessctl get)
+    
+    # Calculate the brightness percentage
+    brightness_percentage=$(( (current_brightness * 100) / max_brightness ))
+    
     echo "$brightness_percentage"
 }
 
-# Returns a mute icon, a volume-low icon, or a volume-high icon, depending on the volume
 function get_volume_icon {
     volume=$(get_volume)
     mute=$(get_mute)
-    if [ "$volume" -eq 0 ] || [ "$mute" == "yes" ] ; then
-        volume_icon="   "
-    elif [ "$volume" -lt 50 ]; then
-        volume_icon="   "
+    
+    if [ "$volume" = 0 ]; then
+        volume_icon="🔇"
+    elif [ "$volume" -le 30 ]; then
+        volume_icon="🔈"
+    elif [ "$volume" -le 70 ]; then
+        volume_icon="🔉"
     else
-        volume_icon="   "
+        volume_icon="🔊"
     fi
 }
 
-# Always returns the same icon - I couldn't get the brightness-low icon to work with fontawesome
 function get_brightness_icon {
-    brightness_icon="   "
+    # Placeholder function for getting brightness icon
+    brightness_icon="🔆"
 }
 
 # Displays a volume notification using dunstify
 function show_volume_notif {
-    volume=$(get_mute)
+    volume=$(get_volume)
     get_volume_icon
     dunstify -i audio-volume-muted-blocking -t 1000 -r 2593 -u normal "$volume_icon $volume%" -h int:value:$volume -h string:hlcolor:$bar_color
 }
@@ -62,7 +58,7 @@ function show_brightness_notif {
     brightness=$(get_brightness)
     echo "Brightness value: $brightness"  # Debugging line
     get_brightness_icon
-    dunstify -t 1000 -r 2593 -u normal "$brightness_icon $brightness%" -h int:value:$brightness -h string:hlcolor:$bar_color &
+    dunstify -t 1000 -r 2593 -u normal "$brightness_icon ${brightness}%" -h int:value:$brightness -h string:hlcolor:$bar_color &
 }
 
 # Main function - Takes user input, "volume_up", "volume_down", "brightness_up", or "brightness_down"
@@ -91,16 +87,30 @@ case $1 in
     show_volume_notif
     ;;
 
-brightness_up)
-    # Increases brightness and displays the notification
-    brightnessctl s $brightness_step%+ 100%  # Set maximum brightness to 100%
+    brightness_up)
+    # Increases brightness by percentage and displays the notification
+    current_brightness=$(brightnessctl get)
+    step=$(($max_brightness * $brightness_step / 100))
+
+    new_brightness=$(($current_brightness + $step))
+    if [ "$new_brightness" -gt "$max_brightness" ]; then
+        new_brightness=$max_brightness
+    fi
+    brightnessctl set "$new_brightness"
     show_brightness_notif
     ;;
 
-brightness_down)
-    # Decreases brightness and displays the notification
-    brightnessctl s $brightness_step%- 100%  # Set maximum brightness to 100%
+    brightness_down)
+    # Decreases brightness by percentage and displays the notification
+    current_brightness=$(brightnessctl get)
+    step=$(($max_brightness * $brightness_step / 100))
+
+    new_brightness=$(($current_brightness - $step))
+    if [ "$new_brightness" -lt 0 ]; then
+        new_brightness=0
+    fi
+    brightnessctl set "$new_brightness"
     show_brightness_notif
     ;;
-
 esac
+

@@ -12,8 +12,9 @@
 set $mod Mod4
 
 exec --no-startup-id sleep 1 && feh --bg-fill /home/moonholiday/Pictures/dsotm.jpg
-exec --no-startup-id xrandr --auto --output eDP --left-of HDMI-1-1
+exec --no-startup-id xrandr --auto --output eDP-1 --left-of HDMI-1-0
 exec --no-startup-id picom -CGb
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -96,8 +97,8 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+q kill
 
+bindsym $mod+d exec dmenu_run -i -b -p 'Arch Linux' -fn 'JetBrainsMono Nerd Font:size=14' -nb '#292a44' -nf '#e0def4' -sf '#292a44' -sb '#ea9a97'
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
