@@ -1,29 +1,16 @@
 # Dotfiles
 
-Welcome to my dotfiles repository! This repository contains my personal configuration files for various applications and tools that I use on my system. It includes configurations for Neovim, i3, picom, and more.
+This repository contains my personal dotfiles and configuration scripts.
 
-## 📂 Contents
+## 📦 Installation
 
-- `.config/nvim/` - Configuration files for Neovim.
-- `.config/i3/` - Configuration files for i3 window manager.
-- `.config/i3blocks/` - Configuration files for i3blocks.
-- `.config/picom/` - Configuration files for Picom compositor.
+To install these dotfiles on a new system:
 
-## ⚙️ Setup Instructions
-
-To set up these dotfiles on your system, follow these steps:
-
-### 1. Clone the Repository
-
-Clone this repository to your home directory:
-
-```sh
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
+1. Clone this repository:
 
 ## ⚙️ Install Dependencies
 
 Some configurations may require additional software or plugins. Make sure to install the necessary dependencies:
-
 - **Neovim**: Follow the [Neovim installation guide](https://neovim.io/) to install Neovim.
 - **i3**: Install i3 from your package manager.
 - **Picom**: Install Picom from your package manager.
@@ -58,5 +45,4 @@ If you find any issues or have suggestions for improvements, feel free to open a
 
 ## 📬 Contact
 
-For any questions or feedback, you can reach me at [your-email@example.com](mailto:727moonholiday@gmail.com).
-
+For any questions or feedback, you can reach me at [727moonholiday@gmail.com](mailto:727moonholiday@gmail.com).
