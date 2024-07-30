@@ -1,0 +1,64 @@
+# Example Alacritty configuration with JetBrains Mono Nerd Font
+
+# Font configuration
+font:
+  # Use JetBrains Mono Nerd Font
+  normal:
+    family: 'JetBrainsMono Nerd Font'
+    style: Regular
+  bold:
+    family: 'JetBrainsMono Nerd Font'
+    style: Bold
+  italic:
+    family: 'JetBrainsMono Nerd Font'
+    style: Italic
+  bold_italic:
+    family: 'JetBrainsMono Nerd Font'
+    style: Bold Italic
+
+# Visual bell configuration (optional)
+bell:
+  # Set to false to disable visual bell
+  show: true
+
+# Scrolling configuration (optional)
+scrollback:
+  # Maximum number of lines to keep in scrollback buffer
+  history: 10000
+
+# Colorscheme configuration (optional)
+colors:
+  # Default colors
+  primary:
+    background: '#282a36'
+    foreground: '#f8f8f2'
+
+  # Normal colors
+  normal:
+    black: '#21222c'
+    red: '#ff5555'
+    green: '#50fa7b'
+    yellow: '#f1fa8c'
+    blue: '#bd93f9'
+    magenta: '#ff79c6'
+    cyan: '#8be9fd'
+    white: '#f8f8f2'
+
+  # Bright colors
+  bright:
+    black: '#6272a4'
+    red: '#ff6e6e'
+    green: '#69ff94'
+    yellow: '#ffffa5'
+    blue: '#d6acff'
+    magenta: '#ff92df'
+    cyan: '#a4ffff'
+    white: '#ffffff'
+
+# Keybindings configuration (optional)
+key_bindings:
+  # Example key binding to clear the screen
+  - { key: KeyC, mods: Control, action: ClearScrollback }
+
+# Additional configuration options can be added as needed
+

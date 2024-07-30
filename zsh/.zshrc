@@ -111,5 +111,5 @@ fzf_tmux_session() {
     fi
 }
 
-alias ss='fzf_tmux_session'
+alias gg='fzf_tmux_session'
 
